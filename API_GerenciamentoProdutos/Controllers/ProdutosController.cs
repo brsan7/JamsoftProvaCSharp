@@ -21,57 +21,88 @@ namespace JamsoftProvaCSharp.Controllers
             _context = context;
         }
 
-        // GET: api/Produtoes
+        // GET: api/produtos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
         {
-            return await _context.Produtos.ToListAsync();
+            Array lstProdutos;
+
+            try
+            {
+                lstProdutos = await (from produto in _context.Set<Produto>()
+                                    select new
+                                    {
+                                        produto.nome,
+                                        produto.valor_unitario,
+                                        produto.qtde_estoque
+                                    }).ToArrayAsync();
+            }
+            catch (Exception)
+            {
+                return StatusCode(400, "Ocorreu um erro desconhecido");
+            }
+
+            return Ok(lstProdutos);
         }
 
-        // GET: api/Produtoes/5
+        // GET: api/produtos/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Produto>> GetProduto(int id)
         {
-            var produto = await _context.Produtos.FindAsync(id);
+            Produto produto;
 
-            if (produto == null)
+            try
             {
-                return NotFound();
+                produto = await _context.Produtos.FindAsync(id);
             }
-
-            return produto;
+            catch(Exception)
+            {
+                return StatusCode(400, "Ocorreu um erro desconhecido");
+            }
+            
+            return Ok(produto);
         }
 
-        // POST: api/Produtoes
+        // POST: api/produtos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Produto>> PostProduto(Produto produto)
         {
-            _context.Produtos.Add(produto);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetProduto), new { id = produto.produto_id }, produto);
+            //adicionar return StatusCode(412, "Os valores informados não são válidos");
+
+            try
+            {
+                _context.Produtos.Add(produto);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return StatusCode(400, "Ocorreu um erro desconhecido");
+            }
+
+            return StatusCode(200, "Produto Cadastrado");
         }
 
-        // DELETE: api/Produtoes/5
+        // DELETE: api/produtos/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduto(int id)
         {
-            var produto = await _context.Produtos.FindAsync(id);
-            if (produto == null)
+            Produto produto;
+
+            try
             {
-                return NotFound();
+                produto = await _context.Produtos.FindAsync(id);
+
+                _context.Produtos.Remove(produto);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return StatusCode(400, "Ocorreu um erro desconhecido");
             }
 
-            _context.Produtos.Remove(produto);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool ProdutoExists(int id)
-        {
-            return _context.Produtos.Any(e => e.produto_id == id);
+            return StatusCode(200, "Produto excluído com sucesso");
         }
     }
 }

@@ -3,30 +3,27 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JamsoftProvaCSharp.Entidades
 {
-    public class Pagamento
+    public class Cartao
     {
-        [Key]
-        public int pagamento_id { get; set; }
-
-        
         [Required]
         [MaxLength(50)]
         public string titular { get; set; } = null!;
 
-        [Required]
-        [Column("numero_cartao", TypeName = "bigint")]
-        public Int64 numero_cartao { get; set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [MaxLength(17)]
+        public string numero_cartao { get; set; } = null!;
 
         [Required]
-        public DateTime data_expiracao { get; set; }
+        [MaxLength(7)]
+        public string data_expiracao { get; set; } = null!;
 
-        
+
         [Required]
         [MaxLength(20)]
         public string bandeira { get; set; } = null!;
 
         [Required]
-        [Column("cvv", TypeName = "smallint")]
-        public int cvv { get; set; }
+        [MaxLength(3)]
+        public string cvv { get; set; } = null!;
     }
 }

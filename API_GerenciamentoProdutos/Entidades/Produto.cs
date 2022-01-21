@@ -18,5 +18,10 @@ namespace JamsoftProvaCSharp.Entidades
 
         [Required]
         public int qtde_estoque { get; set;}
+
+        public DateTime? data_ultima_compra { get; set; }
+
+        [Column("valor_ultima_compra", TypeName = "money")]
+        public double? valor_ultima_compra { get; set; }
     }
 }
