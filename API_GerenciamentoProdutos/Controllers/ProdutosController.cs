@@ -1,12 +1,8 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using API_GerenciamentoProdutos.Entidades;
+using API_GerenciamentoProdutos.Dominio;
+using API_GerenciamentoProdutos.Repositorio;
 
 namespace API_GerenciamentoProdutos.Controllers
 {
@@ -14,7 +10,7 @@ namespace API_GerenciamentoProdutos.Controllers
     [ApiController]
     public class ProdutosController : ControllerBase
     {
-        private readonly API_GerenciamentoProdutosContexto _context;
+        public readonly API_GerenciamentoProdutosContexto _context;
 
         public ProdutosController(API_GerenciamentoProdutosContexto context)
         {
@@ -25,19 +21,9 @@ namespace API_GerenciamentoProdutos.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
         {
-            Array lstProdutos;
+            Array lstProdutos = await new ProdutoDAL(_context).listarProdutos();
 
-            try
-            {
-                lstProdutos = await (from produto in _context.Set<Produto>()
-                                     select new
-                                     {
-                                         produto.nome,
-                                         produto.valor_unitario,
-                                         produto.qtde_estoque
-                                     }).ToArrayAsync();
-            }
-            catch (Exception)
+            if (lstProdutos == null)
             {
                 return StatusCode(400, "Ocorreu um erro desconhecido");
             }
@@ -49,13 +35,9 @@ namespace API_GerenciamentoProdutos.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Produto>> GetProduto(int id)
         {
-            Produto produto;
+            Produto produto = await new ProdutoDAL(_context).buscarId(id);
 
-            try
-            {
-                produto = await _context.Produtos.FindAsync(id);
-            }
-            catch (Exception)
+            if (produto == null)
             {
                 return StatusCode(400, "Ocorreu um erro desconhecido");
             }
@@ -68,19 +50,16 @@ namespace API_GerenciamentoProdutos.Controllers
         [HttpPost]
         public async Task<ActionResult<Produto>> PostProduto(Produto produto)
         {
-
-            //ADICIONAR return StatusCode(412, "Os valores informados não são válidos");
-
-            try
+            if (!ProdutoBLL.ValidarDados(produto))
             {
-                _context.Produtos.Add(produto);
-                await _context.SaveChangesAsync();
+                return StatusCode(412, "Os valores informados não são válidos");
             }
-            catch (Exception)
+
+            if (!await new ProdutoDAL(_context).registrar(produto))
             {
                 return StatusCode(400, "Ocorreu um erro desconhecido");
             }
-
+            
             return StatusCode(200, "Produto Cadastrado");
         }
 
@@ -88,21 +67,14 @@ namespace API_GerenciamentoProdutos.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduto(int id)
         {
-            Produto produto;
-
-            try
-            {
-                produto = await _context.Produtos.FindAsync(id);
-
-                _context.Produtos.Remove(produto);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception)
+            if (!await new ProdutoDAL(_context).deletar(id))
             {
                 return StatusCode(400, "Ocorreu um erro desconhecido");
             }
-
+            
             return StatusCode(200, "Produto excluído com sucesso");
         }
+
+        
     }
 }

@@ -17,7 +17,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\API_GerenciamentoProdutos\API_GerenciamentoProdutos.csproj"/>
+		<ProjectReference Include="..\API_GerenciamentoProdutos\API_GerenciamentoProdutos.csproj" />
 	</ItemGroup>
 
 </Project>

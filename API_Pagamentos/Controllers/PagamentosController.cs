@@ -1,12 +1,8 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using API_GerenciamentoProdutos.Entidades;
+using API_Pagamentos.Repositorio;
+using API_Pagamentos.Dominio;
 
 namespace API_Pagamentos.Controllers
 {
@@ -14,14 +10,14 @@ namespace API_Pagamentos.Controllers
     [ApiController]
     public class PagamentosController : ControllerBase
     {
-        private readonly API_GerenciamentoProdutosContexto _context;
+        public readonly API_GerenciamentoProdutosContexto _context;
 
         public PagamentosController(API_GerenciamentoProdutosContexto context)
         {
             _context = context;
         }
 
-        // POST: api/Pagamentos
+        // POST: api/pagamentos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Pagamento>> PostPagamento(Pagamento pagamento)
@@ -30,21 +26,9 @@ namespace API_Pagamentos.Controllers
             Cartao cartao = pagamento.Cartao;
             pagamento.Cartao = null;
 
-            if (pagamento.valor > 100)
-            {
-                pagamento.status_compra = "APROVADO";
-            }
-            else
-            {
-                pagamento.status_compra = "REJEITADO";
-            }
-
-            try
-            {
-                _context.Pagamentos.Add(pagamento);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception)
+            pagamento.status_compra = PagamentoBLL.status_compra(pagamento);
+            
+            if (!await new PagamentoDAL(_context).registrar(pagamento))
             {
                 return StatusCode(400, "Ocorreu um erro desconhecido");
             }
