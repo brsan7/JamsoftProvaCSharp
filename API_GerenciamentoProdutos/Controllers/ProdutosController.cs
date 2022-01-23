@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using JamsoftProvaCSharp.Entidades;
+using API_GerenciamentoProdutos.Entidades;
 
-namespace JamsoftProvaCSharp.Controllers
+namespace API_GerenciamentoProdutos.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ProdutosController : ControllerBase
     {
-        private readonly JamsoftProvaCSharpContexto _context;
+        private readonly API_GerenciamentoProdutosContexto _context;
 
-        public ProdutosController(JamsoftProvaCSharpContexto context)
+        public ProdutosController(API_GerenciamentoProdutosContexto context)
         {
             _context = context;
         }
@@ -30,12 +30,12 @@ namespace JamsoftProvaCSharp.Controllers
             try
             {
                 lstProdutos = await (from produto in _context.Set<Produto>()
-                                    select new
-                                    {
-                                        produto.nome,
-                                        produto.valor_unitario,
-                                        produto.qtde_estoque
-                                    }).ToArrayAsync();
+                                     select new
+                                     {
+                                         produto.nome,
+                                         produto.valor_unitario,
+                                         produto.qtde_estoque
+                                     }).ToArrayAsync();
             }
             catch (Exception)
             {
@@ -55,11 +55,11 @@ namespace JamsoftProvaCSharp.Controllers
             {
                 produto = await _context.Produtos.FindAsync(id);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return StatusCode(400, "Ocorreu um erro desconhecido");
             }
-            
+
             return Ok(produto);
         }
 
@@ -69,7 +69,7 @@ namespace JamsoftProvaCSharp.Controllers
         public async Task<ActionResult<Produto>> PostProduto(Produto produto)
         {
 
-            //adicionar return StatusCode(412, "Os valores informados não são válidos");
+            //ADICIONAR return StatusCode(412, "Os valores informados não são válidos");
 
             try
             {

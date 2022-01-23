@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace JamsoftProvaCSharp.Entidades
+namespace API_GerenciamentoProdutos.Entidades
 {
     public class Produto
     {
@@ -17,7 +17,7 @@ namespace JamsoftProvaCSharp.Entidades
         public double valor_unitario { get; set; }
 
         [Required]
-        public int qtde_estoque { get; set;}
+        public int qtde_estoque { get; set; }
 
         public DateTime? data_ultima_compra { get; set; }
 

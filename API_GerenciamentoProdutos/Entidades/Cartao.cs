@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace JamsoftProvaCSharp.Entidades
+namespace API_GerenciamentoProdutos.Entidades
 {
     public class Cartao
     {

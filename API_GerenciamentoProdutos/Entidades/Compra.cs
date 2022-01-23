@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace JamsoftProvaCSharp.Entidades
+namespace API_GerenciamentoProdutos.Entidades
 {
     public class Compra
     {
@@ -26,7 +26,7 @@ namespace JamsoftProvaCSharp.Entidades
         //Constraint chave estrangeira FK_Compras_Produtos_produto_id
         public Produto? Produto { get; set; } = null;
 
-        //Constraint chave estrangeira FK_Compras_Pagamentos_pagamento_id
+        //Constraint chave estrangeira FK_Compras_Cartoes_numero_cartao
         public Cartao? Cartao { get; set; } = null;
     }
 }
