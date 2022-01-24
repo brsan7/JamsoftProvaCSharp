@@ -11,6 +11,7 @@ namespace API_Pagamentos.Controllers
     public class PagamentosController : ControllerBase
     {
         public readonly API_GerenciamentoProdutosContexto _context;
+        private PagamentoDAL pagamentoDAL;
 
         public PagamentosController(API_GerenciamentoProdutosContexto context)
         {
@@ -22,20 +23,22 @@ namespace API_Pagamentos.Controllers
         [HttpPost]
         public async Task<ActionResult<Pagamento>> PostPagamento(Pagamento pagamento)
         {
-            pagamento.numero_cartao = pagamento.Cartao.numero_cartao;
+            pagamentoDAL = new PagamentoDAL(_context);
+
             Cartao cartao = pagamento.Cartao;
+            pagamento.numero_cartao = pagamento.Cartao.numero_cartao;
             pagamento.Cartao = null;
 
-            pagamento.status_compra = PagamentoBLL.status_compra(pagamento);
+            pagamento.estado = PagamentoBLL.status_compra(pagamento);
             
-            if (!await new PagamentoDAL(_context).registrar(pagamento))
+            if (!await pagamentoDAL.registrar(pagamento))
             {
                 return StatusCode(400, "Ocorreu um erro desconhecido");
             }
 
             pagamento.Cartao = cartao;
 
-            return pagamento;
+            return Ok(pagamento);
         }
     }
 }

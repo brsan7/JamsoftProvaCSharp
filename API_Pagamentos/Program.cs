@@ -5,14 +5,15 @@ using API_GerenciamentoProdutos.Entidades;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
 builder.Services.AddDbContext<API_GerenciamentoProdutosContexto>(opt =>
     opt.UseSqlServer("JamsoftProvaCSharp"));
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
+
+//configura uma url fixa
+builder.WebHost.UseUrls("http://localhost:7070/");
 
 var app = builder.Build();
 
@@ -20,11 +21,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    //app.UseSwagger();
-    //app.UseSwaggerUI();
 }
-
-//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

@@ -16,7 +16,7 @@ namespace API_GerenciamentoProdutos.Entidades
         public double valor { get; set; }
 
         [MaxLength(10)]
-        public string status_compra { get; set; } = "";
+        public string estado { get; set; } = "";
 
 
         //Constraint chave estrangeira FK_Pagamentos_Cartoes_numero_cartao

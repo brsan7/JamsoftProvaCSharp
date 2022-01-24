@@ -44,6 +44,22 @@ namespace API_GerenciamentoProdutos.Repositorio
             }
         }
 
+        public async Task<List<Produto>> buscarDuplicidade(string nome)
+        {
+            List<Produto> resultado;
+            try
+            {
+                resultado = await (from produto in _context.Set<Produto>()
+                                   where produto.nome.Contains(nome)
+                                   select produto).ToListAsync();
+            }
+            catch (Exception)
+            {
+                resultado = new List<Produto>();
+            }
+            return resultado;
+        }
+
         public async Task<bool> registrar(Produto produto)
         {
             try

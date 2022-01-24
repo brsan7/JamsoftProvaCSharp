@@ -11,6 +11,8 @@ namespace API_GerenciamentoProdutos.Controllers
     public class ProdutosController : ControllerBase
     {
         public readonly API_GerenciamentoProdutosContexto _context;
+        private ProdutoDAL produtoDAL;
+        private ProdutoBLL produtoBLL;
 
         public ProdutosController(API_GerenciamentoProdutosContexto context)
         {
@@ -21,7 +23,9 @@ namespace API_GerenciamentoProdutos.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
         {
-            Array lstProdutos = await new ProdutoDAL(_context).listarProdutos();
+            produtoDAL = new ProdutoDAL(_context);
+
+            Array lstProdutos = await produtoDAL.listarProdutos();
 
             if (lstProdutos == null)
             {
@@ -35,7 +39,9 @@ namespace API_GerenciamentoProdutos.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Produto>> GetProduto(int id)
         {
-            Produto produto = await new ProdutoDAL(_context).buscarId(id);
+            produtoDAL = new ProdutoDAL(_context);
+
+            Produto produto = await produtoDAL.buscarId(id);
 
             if (produto == null)
             {
@@ -50,12 +56,15 @@ namespace API_GerenciamentoProdutos.Controllers
         [HttpPost]
         public async Task<ActionResult<Produto>> PostProduto(Produto produto)
         {
-            if (!ProdutoBLL.ValidarDados(produto))
+            produtoDAL = new ProdutoDAL(_context);
+            produtoBLL = new ProdutoBLL(_context);
+
+            if (!ProdutoBLL.ValidarDados(produto) || !await produtoBLL.ValidarUnicidade(produto))
             {
                 return StatusCode(412, "Os valores informados não são válidos");
             }
 
-            if (!await new ProdutoDAL(_context).registrar(produto))
+            if (!await produtoDAL.registrar(produto))
             {
                 return StatusCode(400, "Ocorreu um erro desconhecido");
             }
@@ -67,14 +76,14 @@ namespace API_GerenciamentoProdutos.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduto(int id)
         {
-            if (!await new ProdutoDAL(_context).deletar(id))
+            produtoDAL = new ProdutoDAL(_context);
+
+            if (!await produtoDAL.deletar(id))
             {
                 return StatusCode(400, "Ocorreu um erro desconhecido");
             }
             
             return StatusCode(200, "Produto excluído com sucesso");
         }
-
-        
     }
 }

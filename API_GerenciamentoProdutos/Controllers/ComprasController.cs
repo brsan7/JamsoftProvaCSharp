@@ -12,6 +12,9 @@ namespace API_GerenciamentoProdutos.Controllers
     public class ComprasController : ControllerBase
     {
         public readonly API_GerenciamentoProdutosContexto _context;
+        private CompraBLL compraBLL;
+        private CompraDAL compraDAL;
+        private ProdutoDAL produtoDAL;
 
         public ComprasController(API_GerenciamentoProdutosContexto context)
         {
@@ -23,7 +26,11 @@ namespace API_GerenciamentoProdutos.Controllers
         [HttpPost]
         public async Task<ActionResult<Compra>> PostCompra(Compra compra)
         {
-            Produto produto = await new CompraBLL(_context).ValidarDados(compra);
+            compraBLL = new CompraBLL(_context);
+            compraDAL = new CompraDAL(_context);
+            produtoDAL = new ProdutoDAL(_context);
+
+            Produto produto = await compraBLL.ValidarDados(compra);
 
             if (produto == null)
             {
@@ -40,7 +47,7 @@ namespace API_GerenciamentoProdutos.Controllers
             Pagamento validacaoPagamento 
                 = await PagamentoService.ValidarPagamento(pagamento);
 
-            if (!validacaoPagamento.status_compra.Equals("APROVADO"))
+            if (!validacaoPagamento.estado.Equals("APROVADO"))
             {
                 return StatusCode(412, "Os valores informados não são válidos");
             }
@@ -49,15 +56,16 @@ namespace API_GerenciamentoProdutos.Controllers
             compra.numero_cartao = compra.Cartao.numero_cartao;
             compra.Cartao = null;
 
-            if (await new CompraDAL(_context).registrar(compra))
+            if (await compraDAL.registrar(compra))
             {
                 compra.Produto = produto;
 
-                if (!await new ProdutoDAL(_context).atualizarEstoque(compra))
+                //se houver um erro na atualização do estoque o registro da compra será removido
+                if (!await produtoDAL.atualizarEstoque(compra))
                 {
                     compra.Produto = null;
 
-                    await new CompraDAL(_context).reverterCompra(compra);
+                    await compraDAL.reverterCompra(compra);
 
                     return StatusCode(400, "Ocorreu um erro desconhecido");
                 }

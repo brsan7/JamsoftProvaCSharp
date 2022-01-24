@@ -9,7 +9,7 @@ namespace API_GerenciamentoProdutos.Servicos
         public static async Task<Pagamento> ValidarPagamento(Pagamento pagamento)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:5000/");
+            client.BaseAddress = new Uri("http://localhost:7070/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));

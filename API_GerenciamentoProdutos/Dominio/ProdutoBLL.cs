@@ -1,5 +1,6 @@
 ﻿using API_GerenciamentoProdutos.Entidades;
 using API_GerenciamentoProdutos.Controllers;
+using API_GerenciamentoProdutos.Repositorio;
 
 
 namespace API_GerenciamentoProdutos.Dominio
@@ -12,6 +13,8 @@ namespace API_GerenciamentoProdutos.Dominio
 
         public static bool ValidarDados(Produto? produto)
         {
+            
+
             if (produto == null) return false;
             if (produto.nome == null) return false;
             if (produto.nome.Equals("")) return false;
@@ -19,6 +22,15 @@ namespace API_GerenciamentoProdutos.Dominio
             if (produto.valor_unitario <= 0) return false;
 
             return true;
+        }
+
+        public async Task<bool> ValidarUnicidade(Produto produto)
+        {
+            ProdutoDAL produtoDAL = new ProdutoDAL(_context);
+            List<Produto> resultado = await produtoDAL.buscarDuplicidade(produto.nome);
+
+            if (resultado.Count == 0) return true;
+            else return false;
         }
 
         public static Produto calcularEstoque(Compra compra)

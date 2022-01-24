@@ -8,14 +8,14 @@ namespace API_Pagamentos.Dominio
         {
             if (pagamento.valor > 100)
             {
-                pagamento.status_compra = "APROVADO";
+                pagamento.estado = "APROVADO";
             }
             else
             {
-                pagamento.status_compra = "REJEITADO";
+                pagamento.estado = "REJEITADO";
             }
 
-            return pagamento.status_compra;
+            return pagamento.estado;
         }
     }
 }
