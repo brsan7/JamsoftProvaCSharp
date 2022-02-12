@@ -9,7 +9,7 @@ namespace ClienteAPI.ViewModels
     {
         public AboutViewModel()
         {
-            Title = "About";
+            Title = "Apresentação";
             OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
         }
 

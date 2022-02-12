@@ -3,8 +3,8 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:ClienteAPI.Views"
        Title="ClienteAPI"
-       x:Class="ClienteAPI.AppShell">
-
+       x:Class="ClienteAPI.AppShell"
+       FlyoutBackgroundImage="JamsoftBackgroud.jpg">
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
     
@@ -87,10 +87,11 @@
     <FlyoutItem Title="Área Cliente" Icon="icon_feed.png">
         <ShellContent Route="ItemsCompraPage" ContentTemplate="{DataTemplate local:ItemsCompraPage}" />
     </FlyoutItem>
-
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>
+
+    
 
     <!--
         TabBar lets you define content that won't show up in a flyout menu. When this content is active
@@ -114,14 +115,7 @@
             <!-- <Grid>ContentHere</Grid> -->
             <Grid BackgroundColor="Black">
                 <Image Aspect="AspectFill"
-               Source="xamarin_logo.jpg"
-               Opacity="0.6" />
-                <Label Text="Jamsoft Prova C#"
-                       TextColor="Red"
-                       FontAttributes="Bold"
-                       FontSize="32"
-                       HorizontalTextAlignment="Center"
-                       VerticalTextAlignment="End" />
+               Source="JamsoftLogo2.jpg"/>
             </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
@@ -149,6 +143,5 @@
         </DataTemplate>
     </Shell.MenuItemTemplate>
     -->
-    
 
 </Shell>

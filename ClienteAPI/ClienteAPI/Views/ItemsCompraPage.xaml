@@ -38,4 +38,4 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </RefreshView>
-   </ContentPage>
+</ContentPage>

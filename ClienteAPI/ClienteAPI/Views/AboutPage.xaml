@@ -11,7 +11,7 @@
     
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Color x:Key="Accent">#96d1ff</Color>
+            <Color x:Key="Accent">White</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -22,15 +22,16 @@
         </Grid.RowDefinitions>
         <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                    <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
+                <ContentView VerticalOptions="FillAndExpand">
+                    <Image Source="JamsoftLogo1.png" VerticalOptions="Center" HeightRequest="150" />
                 </ContentView>
             </StackLayout>
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="Start developing now" FontSize="Title"/>
-                <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Evolução da Prova C#" FontSize="Title"/>
+                <Label Text="Projeto construido com o objetivo de familiarização com o Xamarin, ele consome a API desenvolvida na prova seletiva." FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Ele foi dividido em duas partes, ''Área da Empresa'' que permite consultar, inserir e remover produtos do estoque e ''Área do Cliente'' que permite consultar e comprar produtos do estoque." FontSize="16" Padding="0,0,0,0"/>
                 <Label FontSize="16" Padding="0,24,0,0">
                     <Label.FormattedText>
                         <FormattedString>

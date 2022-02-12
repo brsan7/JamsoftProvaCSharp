@@ -16,18 +16,15 @@ namespace ClienteAPI.ViewModels
 
         public ObservableCollection<Item> Items { get; }
         public Command LoadItemsCommand { get; }
-        //public Command AddItemCommand { get; }
         public Command<Item> ItemTapped { get; }
 
         public ItemsCompraViewModel()
         {
-            Title = "Produtos em Estoque";
+            Title = "Produtos Disponíveis";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             ItemTapped = new Command<Item>(OnItemSelected);
-
-            //AddItemCommand = new Command(OnAddItem);
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -78,21 +75,19 @@ namespace ClienteAPI.ViewModels
             }
         }
 
-        //private async void OnAddItem(object obj)
-        //{
-        //    //await Shell.Current.GoToAsync(nameof(CompraPage));
-        //}
-
         async void OnItemSelected(Item item)
         {
             if (item == null)
                 return;
 
-            // This will push the ItemDetailPage onto the navigation stack
-            //await Shell.Current.GoToAsync($"{nameof(CompraPage)}?{nameof(CompraViewModel.ItemId)}={item.Id_Produto}");
-            await Shell.Current.GoToAsync(nameof(CompraPage));
-            //OnAddItem(this);
-            
+            try
+            {
+                await Shell.Current.GoToAsync($"{nameof(ComprarPage)}?{nameof(ComprarViewModel.ItemId)}={item.Id_Produto}");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

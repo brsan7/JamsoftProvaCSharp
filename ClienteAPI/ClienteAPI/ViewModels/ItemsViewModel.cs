@@ -21,7 +21,7 @@ namespace ClienteAPI.ViewModels
 
         public ItemsViewModel()
         {
-            Title = "Produtos";
+            Title = "Produtos em Estoque";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
