@@ -17,5 +17,10 @@ namespace ClienteAPI.Views
             InitializeComponent();
             BindingContext = new ComprarViewModel();
         }
+
+        private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            this.FindByName<StackLayout>("credito").IsVisible = true;
+        }
     }
 }

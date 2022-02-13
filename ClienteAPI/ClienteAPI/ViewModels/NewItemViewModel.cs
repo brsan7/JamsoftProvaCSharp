@@ -57,7 +57,9 @@ namespace ClienteAPI.ViewModels
                 valor_unitario = Convert.ToDouble(Valor_Unitario),
                 qtde_estoque = Convert.ToInt32(Qtde_Estoque)
             };
-            await ProdutosService.RegistrarProduto(produto);
+            
+            var resposta = await ProdutosService.RegistrarProduto(produto);
+            await App.Current.MainPage.DisplayAlert($"Status do Registro", ServiceMsg.FormatarResposta(resposta), "OK");
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

@@ -85,12 +85,14 @@ namespace ClienteAPI.ViewModels
             catch (Exception)
             {
                 Debug.WriteLine("Failed to Load Item");
+                await App.Current.MainPage.DisplayAlert($"Status Carregamento", "Falha ao acessar o Produto", "OK");
             }
         }
 
         private async void OnRemoveItem(object obj)
         {
-            await ProdutosService.ExcluirProduto(ItemId);
+            var resposta = await ProdutosService.ExcluirProduto(ItemId);
+            await App.Current.MainPage.DisplayAlert($"Status da Remoção", ServiceMsg.FormatarResposta(resposta), "OK");
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

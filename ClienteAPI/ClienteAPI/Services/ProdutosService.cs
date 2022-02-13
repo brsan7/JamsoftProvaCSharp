@@ -27,7 +27,7 @@ namespace ClienteAPI.Services
         public static async Task<List<Produto>> ListarProdutos()
         {
             HttpClient client = setupClient();
-            HttpResponseMessage response;// = await client.GetAsync("api/produtos");
+            HttpResponseMessage response;
             try
             {
                 response = await client.GetAsync("api/produtos");
@@ -37,7 +37,7 @@ namespace ClienteAPI.Services
             catch (Exception)
             {
                 Debug.WriteLine("Falha em ListarProdutos");
-                return new List<Produto>();
+                return null;
             }
         }
 
@@ -54,14 +54,14 @@ namespace ClienteAPI.Services
             catch (Exception)
             {
                 Debug.WriteLine("Falha em DetalharProduto");
-                return new Produto();
+                return null;
             }
         }
 
-        public static async Task RegistrarProduto(Produto produto)
+        public static async Task<HttpResponseMessage> RegistrarProduto(Produto produto)
         {
             HttpClient client = setupClient();
-            HttpResponseMessage response;
+            HttpResponseMessage response = new HttpResponseMessage();
             try
             {
                 response = await client.PostAsJsonAsync("api/produtos", produto);
@@ -71,12 +71,13 @@ namespace ClienteAPI.Services
             {
                 Debug.WriteLine("Falha em RegistrarProduto");
             }
+            return response;
         }
 
-        public static async Task ExcluirProduto(int Id_Produto)
+        public static async Task<HttpResponseMessage> ExcluirProduto(int Id_Produto)
         {
             HttpClient client = setupClient();
-            HttpResponseMessage response;
+            HttpResponseMessage response = new HttpResponseMessage();
             try
             {
                 response = await client.DeleteAsync($"api/produtos/{Id_Produto}");
@@ -86,6 +87,7 @@ namespace ClienteAPI.Services
             {
                 Debug.WriteLine("Falha em ExcluirProduto");
             }
+            return response;
         }
     }
 }

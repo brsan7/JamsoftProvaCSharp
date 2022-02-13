@@ -19,10 +19,10 @@ namespace ClienteAPI.Services
             return client;
         }
 
-        public static async Task ComprarProduto(Compra compra)
+        public static async Task<HttpResponseMessage> ComprarProduto(Compra compra)
         {
             HttpClient client = setupClient();
-            HttpResponseMessage response;
+            HttpResponseMessage response = new HttpResponseMessage();
             try
             {
                 response = await client.PostAsJsonAsync("api/compras", compra);
@@ -32,6 +32,7 @@ namespace ClienteAPI.Services
             {
                 Debug.WriteLine("Falha em ComprarProduto()");
             }
+            return response;
         }
     }
 }

@@ -6,23 +6,68 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true">
     <ContentPage.Content>
-        <StackLayout Spacing="3" Padding="15">
-            <Label Text="{Binding NomeProduto}" FontSize="Large" FontAttributes="Bold" Padding="10" />
-            <Label Text="{Binding ValorUnitario}" FontSize="Large" FontAttributes="Bold" Padding="10" />
-            
-            <Label Text="Quantidade" FontSize="Medium" />
-            <Entry 
+        <ScrollView>
+            <StackLayout Spacing="3" Padding="15">
+                <Label Text="{Binding NomeProduto}" FontSize="Large" FontAttributes="Bold" Padding="10" />
+                <Label Text="{Binding ValorUnitario}" FontSize="Large" FontAttributes="Bold" Padding="10" />
+
+                <Label Text="Quantidade" FontSize="Medium" />
+                <Entry 
                 Text="{Binding Quantidade, Mode=TwoWay}"
                 FontAttributes="Bold"
                 Keyboard="Numeric"/>
 
-            <Label Text="{Binding Total}" FontSize="Large" FontAttributes="Bold" Padding="10" />
+                <Label Text="{Binding Total}" FontSize="Large" FontAttributes="Bold" Padding="10" />
 
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Cancelar" Command="{Binding CancelarCommand}" HorizontalOptions="FillAndExpand"></Button>
-                <Button Text="Comprar" Command="{Binding ComprarCommand}" HorizontalOptions="FillAndExpand"></Button>
+
+                <StackLayout Padding="20" HorizontalOptions="Center">
+                    <Label Text="Selecione a Forma de Pagamento" />
+                    <RadioButton x:Name="testeRadioButton" 
+                             Content="Cartão de Crédito" 
+                             IsChecked="{Binding Forma_Pagamento_Selecionada}" 
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                    <StackLayout x:Name="credito" IsVisible="false">
+                        <Label Text="Titular"/>
+                        <Entry Text="{Binding Titular, Mode=TwoWay}" 
+                               FontSize="Medium"
+                               Keyboard="Text"/>
+                        <Label Text="Numero Cartao"/>
+                        <Entry Text="{Binding Numero_Cartao, Mode=TwoWay}" 
+                               FontSize="Medium"
+                               Keyboard="Numeric"/>
+                        <Label Text="Data Expiracao"/>
+                        <Entry Text="{Binding Data_Expiracao, Mode=TwoWay}" 
+                               FontSize="Medium"
+                               Keyboard="Numeric"/>
+                        <Label Text="Bandeira"/>
+                        <Entry Text="{Binding Bandeira, Mode=TwoWay}" 
+                               FontSize="Medium"
+                               Keyboard="Text"/>
+                        <Label Text="CVV" />
+                        <Entry Text="{Binding CVV, Mode=TwoWay}" 
+                               FontSize="Medium"
+                               Keyboard="Numeric"/>
+                    </StackLayout>
+                    <RadioButton Content="Cartão de Débito" IsEnabled="false"/>
+                    <RadioButton Content="Boleto" IsEnabled="False"/>
+                    <RadioButton Content="Pix" IsEnabled="False"/>
+                </StackLayout>
+
+                <StackLayout x:Name="teste1" IsVisible="false" Padding="20" HorizontalOptions="Center">
+                    <Label Text="Selecione a Forma de Pagamento" />
+                </StackLayout>
+
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Cancelar" 
+                            Command="{Binding CancelarCommand}" 
+                            HorizontalOptions="FillAndExpand"/>
+                    <Button Text="Comprar" 
+                            Command="{Binding ComprarCommand}" 
+                            HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 
 </ContentPage>

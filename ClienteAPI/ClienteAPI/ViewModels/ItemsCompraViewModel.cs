@@ -50,6 +50,7 @@ namespace ClienteAPI.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                await App.Current.MainPage.DisplayAlert($"Status Carregamento", "Falha ao acessar os Produtos", "OK");
             }
             finally
             {
