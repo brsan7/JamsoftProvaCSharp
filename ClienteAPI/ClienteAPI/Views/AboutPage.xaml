@@ -29,11 +29,11 @@
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="Evolução da Prova C#" FontSize="Title"/>
-                <Label Text="Projeto construido com o objetivo de familiarização com o Xamarin, ele consome a API desenvolvida na prova seletiva." FontSize="Medium" Padding="0,0,0,0"/>
-                <Label Text="Ele foi dividido em duas partes:" FontSize="Medium" Padding="0,0,0,0"/>
-                <Label Text="''Área da Empresa'' - permite consultar, inserir e remover produtos do estoque:" FontSize="Medium" Padding="0,0,0,0"/>
-                <Label Text="''Área do Cliente'' - permite consultar e comprar produtos do estoque." FontSize="Medium" Padding="0,0,0,0"/>
+                <Label Text="Evolução da Prova C#" FontSize="Title" FontAttributes="Bold"/>
+                <Label Text="Projeto construido com o objetivo de familiarização com o Xamarin, ele consome a API desenvolvida na prova seletiva." FontSize="Medium" FontAttributes="Bold" Padding="0,0,0,0"/>
+                <Label Text="Ele foi dividido em duas partes:" FontSize="Medium" FontAttributes="Bold" Padding="0,0,0,0"/>
+                <Label Text="''Área da Empresa'' - permite consultar, inserir e remover produtos do estoque." FontSize="Medium" FontAttributes="Bold" Padding="0,0,0,0"/>
+                <Label Text="''Área do Cliente'' - permite consultar e comprar produtos do estoque." FontSize="Medium" FontAttributes="Bold" Padding="0,0,0,0"/>
                 <Label FontSize="16" Padding="0,24,0,0">
                     <Label.FormattedText>
                         <FormattedString>

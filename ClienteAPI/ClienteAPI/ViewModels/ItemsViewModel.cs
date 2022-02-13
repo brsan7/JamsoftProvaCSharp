@@ -37,15 +37,13 @@ namespace ClienteAPI.ViewModels
             try
             {
                 Items.Clear();
-                int n = 1;
                 List<Produto> produtos = await ProdutosService.ListarProdutos();
                 
                 
                 foreach (var produto in produtos)
                 {
                     Item item = new Item();
-                    item.Id_Produto = n++;
-                    //item.Id_Produto = produto.produto_id;
+                    item.Id_Produto = produto.produto_id;
                     item.Nome_Produto = produto.nome;
                     item.Valor_em_Questao = $"Quantidade: {produto.qtde_estoque}";
                     

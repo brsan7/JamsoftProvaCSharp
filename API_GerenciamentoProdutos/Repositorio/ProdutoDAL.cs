@@ -20,6 +20,7 @@ namespace API_GerenciamentoProdutos.Repositorio
                 lstProdutos = await (from produto in _context.Set<Produto>()
                                      select new
                                      {
+                                         produto.produto_id,
                                          produto.nome,
                                          produto.valor_unitario,
                                          produto.qtde_estoque
