@@ -19,13 +19,18 @@
                 <DataTemplate>
                     <StackLayout Padding="10" x:DataType="model:Item">
                         <Label Text="{Binding Nome_Produto}" 
-                            LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="16" />
-                        <Label Text="{Binding Valor_Unitario}" 
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13" />
+                               LineBreakMode="NoWrap" 
+                               Style="{DynamicResource ListItemTextStyle}"
+                               FontSize="Large"
+                               FontAttributes="Bold"/>
+                        <Label Text="{Binding Valor_em_Questao}" 
+                               LineBreakMode="NoWrap"
+                               Style="{DynamicResource ListItemDetailTextStyle}"
+                               FontSize="Medium"
+                               FontAttributes="Bold"/>
+                        <BoxView Color="Black"
+                                 WidthRequest="1"
+                                 HeightRequest="1"/>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"

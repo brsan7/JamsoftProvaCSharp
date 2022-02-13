@@ -1,12 +1,9 @@
-﻿using ClienteAPI.ViewModels;
-using ClienteAPI.Views;
-using System;
-using System.Collections.Generic;
+﻿using ClienteAPI.Views;
 using Xamarin.Forms;
 
 namespace ClienteAPI
 {
-    public partial class AppShell : Xamarin.Forms.Shell
+    public partial class AppShell : Shell
     {
         public AppShell()
         {
@@ -14,11 +11,6 @@ namespace ClienteAPI
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             Routing.RegisterRoute(nameof(ComprarPage), typeof(ComprarPage));
-        }
-
-        private async void OnMenuItemClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//LoginPage");
         }
     }
 }

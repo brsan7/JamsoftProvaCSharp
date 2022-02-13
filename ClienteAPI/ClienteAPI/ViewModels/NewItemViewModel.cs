@@ -10,8 +10,9 @@ namespace ClienteAPI.ViewModels
 {
     public class NewItemViewModel : BaseViewModel
     {
-        private string text;
-        private string description;
+        private string nome_produto;
+        private string valor_unitario;
+        private string qtde_estoque;
 
         public NewItemViewModel()
         {
@@ -21,22 +22,22 @@ namespace ClienteAPI.ViewModels
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
 
-        private bool ValidateSave()
+        public string Nome_Produto
         {
-            return !String.IsNullOrWhiteSpace(text)
-                && !String.IsNullOrWhiteSpace(description);
+            get => nome_produto;
+            set => SetProperty(ref nome_produto, value);
         }
 
-        public string Text
+        public string Valor_Unitario
         {
-            get => text;
-            set => SetProperty(ref text, value);
+            get => valor_unitario;
+            set => SetProperty(ref valor_unitario, value);
         }
 
-        public string Description
+        public string Qtde_Estoque
         {
-            get => description;
-            set => SetProperty(ref description, value);
+            get => qtde_estoque;
+            set => SetProperty(ref qtde_estoque, value);
         }
 
         public Command SaveCommand { get; }
@@ -52,14 +53,28 @@ namespace ClienteAPI.ViewModels
         {
             Produto produto = new Produto()
             {
-                nome = Text,
-                valor_unitario = Convert.ToInt32(Description),
-                qtde_estoque = 10
+                nome = Nome_Produto,
+                valor_unitario = Convert.ToDouble(Valor_Unitario),
+                qtde_estoque = Convert.ToInt32(Qtde_Estoque)
             };
             await ProdutosService.RegistrarProduto(produto);
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");
+        }
+
+        private bool ValidateSave()
+        {
+            try
+            {
+                if (Convert.ToDouble(Valor_Unitario) <= 0) return false;
+                if (Convert.ToInt32(Qtde_Estoque) <= 0) return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return !String.IsNullOrWhiteSpace(Nome_Produto);
         }
     }
 }

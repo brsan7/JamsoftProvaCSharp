@@ -6,6 +6,6 @@ namespace ClienteAPI.Models
     {
         public int Id_Produto { get; set; }
         public string Nome_Produto { get; set; }
-        public double Valor_Unitario { get; set; }
+        public string Valor_em_Questao { get; set; }
     }
 }

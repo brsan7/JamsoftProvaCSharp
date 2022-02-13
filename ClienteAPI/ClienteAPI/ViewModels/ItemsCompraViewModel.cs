@@ -44,7 +44,7 @@ namespace ClienteAPI.ViewModels
                     item.Id_Produto = n++;
                     //item.Id_Produto = produto.produto_id;
                     item.Nome_Produto = produto.nome;
-                    item.Valor_Unitario = produto.valor_unitario;
+                    item.Valor_em_Questao = $"R${produto.valor_unitario}";
 
                     Items.Add(item);
                 }

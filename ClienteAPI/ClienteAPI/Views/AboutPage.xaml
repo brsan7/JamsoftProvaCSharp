@@ -30,19 +30,21 @@
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
                 <Label Text="Evolução da Prova C#" FontSize="Title"/>
-                <Label Text="Projeto construido com o objetivo de familiarização com o Xamarin, ele consome a API desenvolvida na prova seletiva." FontSize="16" Padding="0,0,0,0"/>
-                <Label Text="Ele foi dividido em duas partes, ''Área da Empresa'' que permite consultar, inserir e remover produtos do estoque e ''Área do Cliente'' que permite consultar e comprar produtos do estoque." FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Projeto construido com o objetivo de familiarização com o Xamarin, ele consome a API desenvolvida na prova seletiva." FontSize="Medium" Padding="0,0,0,0"/>
+                <Label Text="Ele foi dividido em duas partes:" FontSize="Medium" Padding="0,0,0,0"/>
+                <Label Text="''Área da Empresa'' - permite consultar, inserir e remover produtos do estoque:" FontSize="Medium" Padding="0,0,0,0"/>
+                <Label Text="''Área do Cliente'' - permite consultar e comprar produtos do estoque." FontSize="Medium" Padding="0,0,0,0"/>
                 <Label FontSize="16" Padding="0,24,0,0">
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
-                                <Span Text="Learn more at "/>
-                                <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
+                                <Span Text="Saiba mais em:  "/>
+                                <Span Text="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/README.md" FontAttributes="Bold"/>
                             </FormattedString.Spans>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Button Margin="0,10,0,0" Text="Learn more"
+                <Button Margin="0,10,0,0" Text="Saiba Mais"
                         Command="{Binding OpenWebCommand}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />

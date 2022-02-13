@@ -67,7 +67,7 @@ namespace ClienteAPI.ViewModels
             {
                 produto = await ProdutosService.DetalharProduto(itemId);
                 NomeProduto = produto.nome;
-                ValorUnitario = $"Total: R${produto.valor_unitario}";
+                ValorUnitario = $"R${produto.valor_unitario}";
             }
             catch (Exception)
             {

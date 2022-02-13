@@ -7,6 +7,7 @@ Para resolver o problema proposto, foi utilizado:
 * *Microsoft.EntityFrameworkCore.SqlServer com a abordagem Code First*  
 * *Microsoft.AspNet.WebApi.Client*  
 * *Aplicado os conceitos S.O.L.I.D.*  
+* *Adicionado um projeto mobile(Android e iOS) para consumir a API_GerenciamentoProdutos.*  
   
 *Problema Proposto*  
 Você deve desenvolver uma API REST para compra de produtos utilizando a forma de pagamento cartão de crédito.  
