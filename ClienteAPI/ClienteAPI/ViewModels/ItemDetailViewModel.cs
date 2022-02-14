@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Xamarin.Forms;
 using ClienteAPI.Services;
+using System.Globalization;
 
 namespace ClienteAPI.ViewModels
 {
@@ -75,12 +76,15 @@ namespace ClienteAPI.ViewModels
             try
             {
                 var item = await ProdutosService.DetalharProduto(itemId);
+                string _valor_ultima_compra = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", item.valor_ultima_compra);
+                string _valor_unitario = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", item.valor_unitario);
+
                 Produto_Id = $"ID: {item.produto_id}";
                 Nome_Produto = $"Nome_Produto:{Environment.NewLine}{item.nome}";
-                Valor_Unitario = $"Valor_Unitario:{Environment.NewLine}R${item.valor_unitario}";
+                Valor_Unitario = $"Valor_Unitario:{Environment.NewLine} {_valor_unitario}";
                 Qtde_Estoque = $"Qtde_Estoque: {item.qtde_estoque}";
                 Data_Ultima_Compra = $"Data_Ultima_Compra:{Environment.NewLine}{item.data_ultima_compra}";
-                Valor_Ultima_Compra = $"Valor_Ultima_Compra:{Environment.NewLine}R${item.valor_ultima_compra}";
+                Valor_Ultima_Compra = $"Valor_Ultima_Compra:{Environment.NewLine} {_valor_ultima_compra}";
             }
             catch (Exception)
             {

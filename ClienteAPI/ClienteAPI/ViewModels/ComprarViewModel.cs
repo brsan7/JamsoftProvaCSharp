@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using Xamarin.Forms;
 using ClienteAPI.Services;
+using System.Globalization;
 
 namespace ClienteAPI.ViewModels
 {
@@ -104,7 +105,7 @@ namespace ClienteAPI.ViewModels
             {
                 produto = await ProdutosService.DetalharProduto(itemId);
                 NomeProduto = produto.nome;
-                ValorUnitario = $"R${produto.valor_unitario}";
+                ValorUnitario = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", produto.valor_unitario);
             }
             catch (Exception)
             {
@@ -144,11 +145,12 @@ namespace ClienteAPI.ViewModels
         {
             try
             {
-                Total = $"Total: R${produto.valor_unitario * Convert.ToInt32(Quantidade)}";
+                double total = (produto.valor_unitario * Convert.ToInt32(Quantidade));
+                Total = $"Total: {string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", total)}";
             }
             catch (Exception)
             {
-                Total = "Total: R$0";
+                Total = "Total: R$ 0,00";
                 return false;
             }
 

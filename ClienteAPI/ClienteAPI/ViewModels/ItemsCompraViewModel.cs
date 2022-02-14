@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using ClienteAPI.Services;
+using System.Globalization;
 
 namespace ClienteAPI.ViewModels
 {
@@ -42,9 +43,10 @@ namespace ClienteAPI.ViewModels
                     Item item = new Item();
                     item.Id_Produto = produto.produto_id;
                     item.Nome_Produto = produto.nome;
-                    item.Valor_em_Questao = $"R${produto.valor_unitario}";
+                    item.Valor_em_Questao = 
+                        string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", produto.valor_unitario);
 
-                    Items.Add(item);
+                    Items.Add(item); 
                 }
             }
             catch (Exception ex)
