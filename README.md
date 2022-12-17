@@ -7,7 +7,6 @@ Para resolver o problema proposto, foi utilizado:
 * *Microsoft.EntityFrameworkCore.SqlServer com a abordagem Code First*  
 * *Microsoft.AspNet.WebApi.Client*  
 * *Aplicado os conceitos S.O.L.I.D.*  
-* *Adicionado um projeto mobile(Android e iOS) para consumir a API_GerenciamentoProdutos.*  
   
 *Problema Proposto*  
 Você deve desenvolver uma API REST para compra de produtos utilizando a forma de pagamento cartão de crédito.  
@@ -92,6 +91,7 @@ Código | Resposta
 200 | Venda realizada com sucesso
 400 | Ocorreu um erro desconhecido
 412 | Os valores informados não são válidos
+
 ------- 
 **5. Remover um produto do estoque**  
 Esta rota remove um produto da base de dados.  
@@ -105,6 +105,7 @@ Código  | Resposta
 ------- | ------
 200     | Produto excluído com sucesso
 400     | Ocorreu um erro desconhecido
+
 ------- 
 **6. Criar uma API de pagamentos.**  
 API de pagamentos destinado a lojas virtuais, por ele é possível autorizar transações de pagamentos online. Essa Api terá apenas um POST.  
@@ -144,5 +145,30 @@ Será rejeitada compras menor ou igual a 100
   "estado": "REJEITADO"  
 }
 ````  
-------- 
 
+------- 
+**7. Após ser aprovodo no teste e antes de iniciar o novo emprego.**  
+Desenvolvi um app multiplataforma para consumir a API.  
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_0_1.png" height="450" width="200" >
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_0_2.png" height="450" width="200" >  
+  
+O app foi dividido em duas partes:  
+  
+Área da empresa: permite consultar, inserir e remover produtos do estoque.  
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_1_1.png" height="450" width="200" > 
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_1_2.png" height="450" width="200" > 
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_1_3.png" height="450" width="200" > 
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_1_4.png" height="450" width="200" > 
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_1_5.png" height="450" width="200" > 
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_1_6.png" height="450" width="200" > 
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_1_7.png" height="450" width="200" > 
+  
+  
+Área do Cliente: permite consultar e comprar produtos do estoque.  
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_2_1.png" height="450" width="200" > 
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_2_2.png" height="450" width="200" > 
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_2_3.png" height="450" width="200" >  
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_2_4.png" height="450" width="200" > 
+<img src="https://github.com/brsan7/JamsoftProvaCSharp/blob/master/Screenshots/Screenshot_2_5.png" height="450" width="200" > 
+
+------- 
